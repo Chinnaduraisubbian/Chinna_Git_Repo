@@ -1,0 +1,10 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE LDAP ds_active_directory1
+    FOLDER = '/01 - connectivity'
+    URI='${databases.denodo_training_basics.folder.01 - connectivity.datasources.ldap.ds_active_directory1.URI}'
+    USERNAME='${databases.denodo_training_basics.folder.01 - connectivity.datasources.ldap.ds_active_directory1.USERNAME}'
+    USERPASSWORD='${databases.denodo_training_basics.folder.01 - connectivity.datasources.ldap.ds_active_directory1.USERPASSWORD}' ${databases.denodo_training_basics.folder.01 - connectivity.datasources.ldap.ds_active_directory1.USERPASSWORD.ENCRYPTED}
+    USEPAGING=FALSE
+    MAXPAGESIZE=1000
+    POOL_ENABLED = TRUE;
+

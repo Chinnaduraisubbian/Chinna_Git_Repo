@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW orders FOLDER = '/03 - derived views' AS SELECT id, customer_code, status, date_placed, date_delivered, date_closed, order_id, product_id FROM (SELECT * FROM dv_orders UNION SELECT order_id, datedelivered AS date_delivered, status, dateclosed AS date_closed, dateplaced AS date_placed, id, product_id, customer_code FROM dv_orders_historical);
+
+ALTER VIEW orders
+ LAYOUT (dv_orders = [20, 20, 200, 186], dv_orders_historical = [420, 40, 200, 186]);
+

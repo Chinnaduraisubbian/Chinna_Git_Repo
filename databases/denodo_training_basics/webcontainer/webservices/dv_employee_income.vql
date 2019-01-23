@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE dv_employee_income;
+
+DEPLOY WEBSERVICE dv_employee_income LOGIN = '${databases.denodo_training_basics.webcontainer.webservices.dv_employee_income.LOGIN}' PASSWORD = '${databases.denodo_training_basics.webcontainer.webservices.dv_employee_income.PASSWORD}' ${databases.denodo_training_basics.webcontainer.webservices.dv_employee_income.PASSWORD.ENCRYPTED};
+

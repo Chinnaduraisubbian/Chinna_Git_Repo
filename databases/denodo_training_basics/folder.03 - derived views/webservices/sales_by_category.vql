@@ -1,0 +1,37 @@
+﻿CREATE OR REPLACE SOAP WEBSERVICE sales_by_category
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    I18N  = au_cst
+    DATETYPEMAPPING DATE
+    NOWRAPARRAYS
+    RAISEFAULTONIDU
+    DONOTAPPLYOUTPUTXSLTTOERRORS
+    AUTHENTICATION (WSS BASIC VDP )
+    OUTPUT 
+        ( STYLE DOCUMENT )
+    OPERATION 'sales_by_category' (
+        TYPE SELECT
+        SCHEMA VIEW sales_by_category
+        VQL = 'SELECT categoryname, sales FROM sales_by_category ^ExecuteIfIsNotNull("WHERE ",@WHEREEXPRESSION,"") CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@VERBOSEERRORS,"")^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'sales_by_category' (
+            'CATEGORYNAME' categoryname:'text' '=' OBL 
+        )
+        OUTPUT 
+            'SALES_BY_CATEGORYReturn': Array of ( 'SALES_BY_CATEGORYReturnRow': Register of (
+                categoryname : 'text',
+                sales : 'sales_by_category_return_sales_by_categoryreturnrow_sales'
+            ) (
+                    '/categoryname'='CATEGORYNAME',
+                    '/sales'='SALES':'_register_rank_employeeid_total_amt',
+                    '/sales/employeeid'='EMPLOYEEID',
+                    '/sales/rank'='RANK',
+                    '/sales/total_amt'='TOTAL_AMT'))
+    )
+    FOLDER = '/03 - derived views';
+

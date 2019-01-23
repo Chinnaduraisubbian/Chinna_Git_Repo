@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE denodo_training_basics 'denodo_training_basics';
+
+ALTER DATABASE denodo_training_basics
+  CHARSET DEFAULT;
+

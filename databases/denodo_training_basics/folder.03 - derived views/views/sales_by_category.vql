@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW sales_by_category FOLDER = '/03 - derived views' AS SELECT sales_by_category_intermediate.categoryname AS categoryname, register(sales_by_category_intermediate.rank, sales_by_category_intermediate.employeeid, sales_by_category_intermediate.total_amt) AS sales FROM sales_by_category_intermediate;
+
+ALTER VIEW sales_by_category
+ LAYOUT (sales_by_category_intermediate = [20, 20, 247, 106]);
+

@@ -1,0 +1,8 @@
+﻿/databases/denodo_training_basics/folder.03 - derived views/03 - derived views.vql
+/databases/denodo_training_basics/folder.02 - base views/02 - base views.vql
+/databases/denodo_training_basics/folder.01 - connectivity/01 - connectivity.vql
+/databases/denodo_training_basics/folder.01 - connectivity/datasources/json/ds_sales.vql
+/databases/denodo_training_basics/folder.02 - base views/views/bv_sales_all.vql
+/databases/denodo_training_basics/folder.01 - connectivity/datasources/ws/ds_product.vql
+/databases/denodo_training_basics/folder.01 - connectivity/views/bv_getproductdetailsbycategory.vql
+/databases/denodo_training_basics/folder.03 - derived views/views/dv_product_by_category.vql

@@ -1,0 +1,14 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON ds_sales
+    FOLDER = '/01 - connectivity'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.denodo_training_basics.folder.01 - connectivity.datasources.json.ds_sales.ROUTE.HTTP.URL}'
+    HEADERS (
+        'Accept'='application/json', 
+        'Content-type'='application/json'
+    )
+    CHECKCERTIFICATES
+    AUTHENTICATION BASIC ( 
+      USER '${databases.denodo_training_basics.folder.01 - connectivity.datasources.json.ds_sales.ROUTE.HTTP.USER}'
+      PASSWORD '${databases.denodo_training_basics.folder.01 - connectivity.datasources.json.ds_sales.ROUTE.HTTP.PASSWORD}' ${databases.denodo_training_basics.folder.01 - connectivity.datasources.json.ds_sales.ROUTE.HTTP.PASSWORD.ENCRYPTED} )
+    PROXY OFF;
+

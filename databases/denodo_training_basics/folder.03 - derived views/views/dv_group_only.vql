@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_group_only FOLDER = '/03 - derived views' AS SELECT cn AS cn FROM bv_group GROUP BY cn;
+
+ALTER VIEW dv_group_only
+ LAYOUT (bv_group = [20, 20, 200, 86]);
+

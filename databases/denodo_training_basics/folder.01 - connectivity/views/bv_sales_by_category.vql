@@ -1,0 +1,57 @@
+﻿CREATE OR REPLACE WRAPPER WS bv_sales_by_category
+    FOLDER = '/01 - connectivity'
+    DATASOURCENAME=test_ws
+    SERVICENAME='sales_by_categoryService'
+    PORTNAME='sales_by_category'
+    OPERATIONNAME='sales_by_category'
+    INPUTMESSAGE='sales_by_categoryRequest'
+    OUTPUTMESSAGE='sales_by_categoryResponse'
+    OUTPUTSCHEMA (
+    parameters = '$$0': REGISTER OF (
+        categoryname='CATEGORYNAME' (OBL)
+    ),
+    return = '$$$$': ARRAY OF (
+        sales_by_categoryreturnrow = 'SALES_BY_CATEGORYReturnRow': REGISTER OF (
+            categoryname='CATEGORYNAME',
+            sales = 'SALES': REGISTER OF (
+                rank='RANK',
+                employeeid='EMPLOYEEID',
+                total_amt='TOTAL_AMT'
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE sales_by_category_parameters AS REGISTER OF (categoryname:text);
+
+CREATE OR REPLACE TYPE sales_by_category_return_sales_by_categoryreturnrow_sales AS REGISTER OF (rank:long, employeeid:text, total_amt:float);
+
+CREATE OR REPLACE TYPE sales_by_category_return_sales_by_categoryreturnrow AS REGISTER OF (categoryname:text, sales:sales_by_category_return_sales_by_categoryreturnrow_sales);
+
+CREATE OR REPLACE TYPE sales_by_category_return AS ARRAY OF sales_by_category_return_sales_by_categoryreturnrow;
+
+CREATE OR REPLACE TABLE bv_sales_by_category I18N au_cst (
+        parameters:sales_by_category_parameters, 
+        return:sales_by_category_return
+    )
+    FOLDER = '/01 - connectivity'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_sales_by_category(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD parameters (=,is null) OPT ONE
+             ADD parameters.categoryname (=) OBL ONE
+             ADD return NOS ZERO ()
+             ADD return NOS ZERO ()
+             ADD return.categoryname NOS ZERO ()
+             ADD return.sales NOS ZERO ()
+             ADD return.sales.rank NOS ZERO ()
+             ADD return.sales.employeeid NOS ZERO ()
+             ADD return.sales.total_amt NOS ZERO ()
+        )
+        OUTPUTLIST (parameters, return
+        )
+        WRAPPER (ws bv_sales_by_category)
+    );
+

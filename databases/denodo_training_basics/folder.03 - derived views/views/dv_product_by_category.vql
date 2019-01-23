@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_product_by_category FOLDER = '/03 - derived views' AS SELECT productid AS productid, productname AS productname, productprice AS productprice, (parameters).categoryname AS categoryname FROM FLATTEN bv_getproductdetailsbycategory AS v ( v.return.productdetails);
+
+ALTER VIEW dv_product_by_category
+ LAYOUT (bv_getproductdetailsbycategory = [20, 20, 609, 406]);
+

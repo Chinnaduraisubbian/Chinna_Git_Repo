@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_seller_sales_array FOLDER = '/03 - derived views' AS SELECT dv_getproductdetailsbycategory.categoryname AS categoryname, bv_sales_all.employeeid AS employeeid, sum(bv_sales_all.bundleamount) AS total_amt FROM bv_sales_all AS bv_sales_all INNER JOIN dv_product_by_category AS dv_getproductdetailsbycategory ON bv_sales_all.productid = dv_getproductdetailsbycategory.productid  GROUP BY dv_getproductdetailsbycategory.categoryname, bv_sales_all.employeeid ORDER BY total_amt DESC;
+
+ALTER VIEW dv_seller_sales_array
+ LAYOUT (bv_sales_all = [20, 20, 200, 206], dv_product_by_category = [669, 93, 200, 106]);
+

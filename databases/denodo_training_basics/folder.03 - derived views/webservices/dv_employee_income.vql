@@ -1,0 +1,76 @@
+﻿CREATE OR REPLACE SOAP WEBSERVICE dv_employee_income
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    I18N  = au_cst
+    DATETYPEMAPPING DATE
+    NOWRAPARRAYS
+    RAISEFAULTONIDU
+    DONOTAPPLYOUTPUTXSLTTOERRORS
+    OUTPUT 
+        ( STYLE DOCUMENT )
+    OPERATION 'dv_employee_income' (
+        TYPE SELECT
+        SCHEMA VIEW dv_employee_income
+        VQL = 'SELECT employee_id, first_name, last_name, email, phone_number, hire_date, salary, commission_pct, manager_id, department_id, job_title, min_salary, max_salary, income, final_salary, seniority FROM dv_employee_income ^ExecuteIfIsNotNull("WHERE ",@WHEREEXPRESSION,"") CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@VERBOSEERRORS,"")^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'dv_employee_income' (
+            'EMPLOYEE_ID' employee_id:'decimal' '=' 
+            'FIRST_NAME' first_name:'text' '=' 
+            'LAST_NAME' last_name:'text' '=' 
+            'EMAIL' email:'text' '=' 
+            'PHONE_NUMBER' phone_number:'text' '=' 
+            'HIRE_DATE' hire_date:'text' '=' 
+            'SALARY' salary:'double' '=' 
+            'COMMISSION_PCT' commission_pct:'double' '=' 
+            'MANAGER_ID' manager_id:'double' '=' 
+            'DEPARTMENT_ID' department_id:'double' '=' 
+            'JOB_TITLE' job_title:'text' '=' 
+            'MIN_SALARY' min_salary:'double' '=' 
+            'MAX_SALARY' max_salary:'double' '=' 
+            'INCOME' income:'double' '=' 
+            'FINAL_SALARY' final_salary:'double' '=' 
+            'SENIORITY' seniority:'text' '=' 
+        )
+        OUTPUT 
+            'DV_EMPLOYEE_INCOMEReturn': Array of ( 'DV_EMPLOYEE_INCOMEReturnRow': Register of (
+                employee_id : 'decimal',
+                first_name : 'text',
+                last_name : 'text',
+                email : 'text',
+                phone_number : 'text',
+                hire_date : 'text',
+                salary : 'double',
+                commission_pct : 'double',
+                manager_id : 'double',
+                department_id : 'double',
+                job_title : 'text',
+                min_salary : 'double',
+                max_salary : 'double',
+                income : 'double',
+                final_salary : 'double',
+                seniority : 'text'
+            ) (
+                    '/commission_pct'='COMMISSION_PCT',
+                    '/department_id'='DEPARTMENT_ID',
+                    '/email'='EMAIL',
+                    '/employee_id'='EMPLOYEE_ID',
+                    '/final_salary'='FINAL_SALARY',
+                    '/first_name'='FIRST_NAME',
+                    '/hire_date'='HIRE_DATE',
+                    '/income'='INCOME',
+                    '/job_title'='JOB_TITLE',
+                    '/last_name'='LAST_NAME',
+                    '/manager_id'='MANAGER_ID',
+                    '/max_salary'='MAX_SALARY',
+                    '/min_salary'='MIN_SALARY',
+                    '/phone_number'='PHONE_NUMBER',
+                    '/salary'='SALARY',
+                    '/seniority'='SENIORITY'))
+    )
+    FOLDER = '/03 - derived views';
+

@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW sales_by_category_intermediate FOLDER = '/03 - derived views' AS SELECT dv_seller_sales_array.categoryname AS categoryname, dv_seller_sales_array.employeeid AS employeeid, dv_seller_sales_array.total_amt AS total_amt, rownum() AS rank FROM dv_seller_sales_array;
+
+ALTER VIEW sales_by_category_intermediate
+ LAYOUT (dv_seller_sales_array = [20, 20, 200, 86]);
+

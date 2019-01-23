@@ -1,0 +1,82 @@
+﻿CREATE OR REPLACE WRAPPER JDBC bv_support_get_all_service_request_8147
+    FOLDER = '/02 - base views'
+    DATASOURCENAME=ds_support_site
+    RELATIONNAME='PR_GET_ALL_SERVICE_REQUEST' 
+    OUTPUTSCHEMA (
+        sr_id = 'SR_ID' :'java.lang.Double' (OPT) (sourcetyperadix='10', sourcetypename='DECIMAL(22,0)', sourcetypeid='6', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        sr_date = 'SR_DATE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='DATETIME', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        sr_description = 'SR_DESCRIPTION' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='TEXT', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        customer_ip = 'CUSTOMER_IP' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(100)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        global_case_id = 'GLOBAL_CASE_ID' :'java.lang.Double' (OPT) (sourcetyperadix='10', sourcetypename='DECIMAL(22,0)', sourcetypeid='6', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        case_creation_date = 'CASE_CREATION_DATE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='DATETIME', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        case_closed_date = 'CASE_CLOSED_DATE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='DATETIME', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        case_summary = 'CASE_SUMMARY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='TEXT', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        status_code = 'STATUS_CODE' :'java.lang.Double' (OPT) (sourcetyperadix='10', sourcetypename='DECIMAL(22,0)', sourcetypeid='6', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        status_description = 'STATUS_DESCRIPTION' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(200)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        problem_id = 'PROBLEM_ID' :'java.lang.Double' (OPT) (sourcetyperadix='10', sourcetypename='DECIMAL(22,0)', sourcetypeid='6', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        problem_description = 'PROBLEM_DESCRIPTION' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(200)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        customer_code = 'CUSTOMER_CODE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(20)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        customer_name = 'CUSTOMER_NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(50)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        customer_address = 'CUSTOMER_ADDRESS' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(100)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        customer_phone = 'CUSTOMER_PHONE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(20)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        customer_job_title = 'CUSTOMER_JOB_TITLE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(50)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        agent_id = 'AGENT_ID' :'java.lang.Double' (OPT) (sourcetyperadix='10', sourcetypename='DECIMAL(22,0)', sourcetypeid='6', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        agent_code = 'AGENT_CODE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(20)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE,
+        agent_name = 'AGENT_NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR(100)', sourcetypeid='12', sourcetypedecimals='10', sourcetypesize='2000000000')  NOT SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_support_get_all_service_request I18N us_pst (
+        sr_id:double (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '6'), 
+        sr_date:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        sr_description:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        customer_ip:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        global_case_id:double (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '6'), 
+        case_creation_date:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        case_closed_date:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        case_summary:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        status_code:double (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '6'), 
+        status_description:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        problem_id:double (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '6'), 
+        problem_description:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        customer_code:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        customer_name:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        customer_address:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        customer_phone:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        customer_job_title:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        agent_id:double (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '6'), 
+        agent_code:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12'), 
+        agent_name:text (sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000', sourcetypeid = '12')
+    )
+    FOLDER = '/02 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_support_get_all_service_request(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD sr_id (any) OPT ANY
+             ADD sr_date (any) OPT ANY
+             ADD sr_description (any) OPT ANY
+             ADD customer_ip (any) OPT ANY
+             ADD global_case_id (any) OPT ANY
+             ADD case_creation_date (any) OPT ANY
+             ADD case_closed_date (any) OPT ANY
+             ADD case_summary (any) OPT ANY
+             ADD status_code (any) OPT ANY
+             ADD status_description (any) OPT ANY
+             ADD problem_id (any) OPT ANY
+             ADD problem_description (any) OPT ANY
+             ADD customer_code (any) OPT ANY
+             ADD customer_name (any) OPT ANY
+             ADD customer_address (any) OPT ANY
+             ADD customer_phone (any) OPT ANY
+             ADD customer_job_title (any) OPT ANY
+             ADD agent_id (any) OPT ANY
+             ADD agent_code (any) OPT ANY
+             ADD agent_name (any) OPT ANY
+        )
+        OUTPUTLIST (agent_code, agent_id, agent_name, case_closed_date, case_creation_date, case_summary, customer_address, customer_code, customer_ip, customer_job_title, customer_name, customer_phone, global_case_id, problem_description, problem_id, sr_date, sr_description, sr_id, status_code, status_description
+        )
+        WRAPPER (jdbc bv_support_get_all_service_request_8147)
+    )
+    DECLARE CACHE INDEX id ON (sr_id);
+

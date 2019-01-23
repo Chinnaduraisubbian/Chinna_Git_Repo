@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_bv_getproductdetailsbycategory FOLDER = '/01 - connectivity' AS SELECT bv_getproductdetailsbycategory.parameters AS parameters, bv_getproductdetailsbycategory.return AS return FROM bv_getproductdetailsbycategory;
+
+ALTER VIEW p_bv_getproductdetailsbycategory
+ LAYOUT (bv_getproductdetailsbycategory = [20, 20, 355, 66]);
+

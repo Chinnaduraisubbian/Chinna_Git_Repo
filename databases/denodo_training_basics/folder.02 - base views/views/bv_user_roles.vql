@@ -1,0 +1,52 @@
+﻿CREATE OR REPLACE WRAPPER LDAP bv_user_roles
+    FOLDER = '/02 - base views'
+    DATASOURCENAME=ds_active_directory1
+    OBJECTCLASSES='groupOfNames', 'user'
+    RECURSIVESEARCH=TRUE
+    SINGLE-VALUE=FALSE
+    OUTPUTSCHEMA (
+        displayname = 'displayName' : 'java.lang.String' (OPT),
+        member = 'member' : ARRAY OF (
+            member = 'MEMBER' : REGISTER OF (
+                member = 'member' : 'java.lang.String' (OPT)
+            )
+        ),
+        roleoccupant = 'roleOccupant' : ARRAY OF (
+            roleoccupant = 'roleOccupant' : REGISTER OF (
+                roleoccupant = 'roleOccupant' : 'java.lang.String' (OPT)
+            )
+        )
+    );
+
+CREATE OR REPLACE TYPE _user_member_member AS REGISTER OF (member:text);
+
+CREATE OR REPLACE TYPE _user_member AS ARRAY OF _user_member_member;
+
+CREATE OR REPLACE TYPE _user_roleoccupant_roleoccupant AS REGISTER OF (roleoccupant:double);
+
+CREATE OR REPLACE TYPE _user_roleoccupant AS ARRAY OF _user_roleoccupant_roleoccupant;
+
+CREATE OR REPLACE TABLE bv_user_roles I18N au_cst (
+        displayname:text, 
+        member:_user_member, 
+        roleoccupant:_user_roleoccupant
+    )
+    FOLDER = '/02 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_user_roles(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD displayname (any) OPT ANY
+             ADD member NOS ZERO ()
+             ADD member NOS ZERO ()
+             ADD member.member (any) OPT ANY
+             ADD roleoccupant NOS ZERO ()
+             ADD roleoccupant NOS ZERO ()
+             ADD roleoccupant.roleoccupant (any) OPT ANY
+        )
+        OUTPUTLIST (displayname, member, roleoccupant
+        )
+        WRAPPER (ldap bv_user_roles)
+    );
+

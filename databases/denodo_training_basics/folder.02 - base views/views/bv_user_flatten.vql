@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW bv_user_flatten FOLDER = '/02 - base views' AS SELECT displayname AS displayname, samaccountname AS samaccountname, userprincipalname AS userprincipalname, memberof AS memberof FROM FLATTEN bv_user AS v ( v.memberof);
+
+ALTER VIEW bv_user_flatten
+ LAYOUT (bv_user = [20, 20, 279, 126]);
+
